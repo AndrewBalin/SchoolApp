@@ -51,6 +51,7 @@ class workStudentCard extends StatelessWidget {
                 color: Colors.blue,
                 child: const Text("Пройти тест", style: TextStyle(color: Colors.blue,),),
                 onPressed: () {
+
                 })),
         ],
       ),

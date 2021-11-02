@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:schooapp/Screens/Students/home_screen.dart';
 import 'package:schooapp/Screens/Students/notifications.dart';
 import 'package:schooapp/Screens/Students/grades.dart';
+import 'package:schooapp/Screens/Students/registration_screen.dart';
 import 'package:schooapp/data/Profile.dart';
 
 int _selectedDestination = 0;
@@ -106,7 +107,11 @@ class _DrawerState extends State<DrawerStudent> {
               leading: Icon(Icons.trending_up),
               title: Text('Прогресс'),
               selected: _selectedDestination == 3,
-              onTap: () => selectDestination(3),
+              onTap: () {
+                selectDestination(3);
+                Navigator.push(context, MaterialPageRoute(builder: (context) => LogIn(title: "",)));
+                
+              }
             ),
             ListTile(
               leading: Icon(Icons.record_voice_over),
