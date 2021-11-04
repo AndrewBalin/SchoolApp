@@ -5,6 +5,7 @@ import 'package:schooapp/Screens/Students/grades.dart';
 import 'package:schooapp/Screens/Students/registration_screen.dart';
 import 'package:schooapp/data/Profile.dart';
 
+
 int _selectedDestination = 0;
 
 class DrawerStudent extends StatefulWidget {
@@ -49,9 +50,17 @@ class _DrawerState extends State<DrawerStudent> {
                       ),
                     ),
                     Align(
+                      alignment: Alignment.centerRight+Alignment(0, -.4),
+                      child: Text(
+                        '$n',
+                        style: TextStyle(color: Colors.white, fontSize: 18), /*textTheme.headline6,*/
+                      ),
+                      //),
+                    ),
+                    Align(
                       alignment: Alignment.centerRight,
                       child: Text(
-                        '$name $surname',
+                        '$f',
                         style: TextStyle(color: Colors.white, fontSize: 18), /*textTheme.headline6,*/
                       ),
                       //),
@@ -59,7 +68,7 @@ class _DrawerState extends State<DrawerStudent> {
                     Align(
                       alignment: Alignment.centerRight+Alignment(0, .4),
                       child: Text(
-                        '$school | $classCount"$classLit"',
+                        '$c"$l"|$id',
                         style: TextStyle(color: Colors.white, fontSize: 14), /*textTheme.headline6,*/
                       ),
                     )

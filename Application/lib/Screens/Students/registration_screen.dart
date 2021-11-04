@@ -1,6 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:schooapp/Wigets/drawer.dart';
-import 'package:schooapp/Wigets/notification.dart';
+import 'package:schooapp/Screens/Students/loading_screen.dart';
+import 'package:schooapp/data/Profile.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:schooapp/main.dart';
+
+bool registr = false;
+bool log = false;
+var name, surname, classNum, classLit, school, password;
 
 class LogIn extends StatefulWidget {
   final String title;
@@ -13,8 +20,23 @@ class LogIn extends StatefulWidget {
 
 class _LogInState extends State<LogIn> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
+
   @override
   Widget build(BuildContext context) {
+    if(log == true) {
+      Fluttertoast.showToast(
+          msg: "Проверьте правильность ввода данных и подключение к сети!",
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.CENTER,
+          timeInSecForIosWeb: 1,
+          backgroundColor: Colors.red,
+          textColor: Colors.white,
+          fontSize: 16.0
+
+      );
+      log = false;
+    }
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
@@ -43,7 +65,10 @@ class _LogInState extends State<LogIn> {
                   if (value == null || value.isEmpty) {
                     return 'Пожалуйста, введите своё имя';
                 }
-                return null;
+                  else {
+                    name = value;
+                  }
+
               },
             ),
                 TextFormField(
@@ -54,7 +79,10 @@ class _LogInState extends State<LogIn> {
                   if (value == null || value.isEmpty) {
                     return 'Пожалуйста, введите свою фамилию';
                   }
-                  return null;
+                  else {
+                    surname = value;
+                  }
+
                 },
                 ),
                 TextFormField(
@@ -65,7 +93,10 @@ class _LogInState extends State<LogIn> {
                     if (value == null || value.isEmpty) {
                       return 'Пожалуйста, введите свою школу';
                     }
-                    return null;
+                    else {
+                      school = value;
+                    }
+
                   },
                 ),
                 TextFormField(
@@ -76,7 +107,24 @@ class _LogInState extends State<LogIn> {
                     if (value == null || value.isEmpty) {
                       return 'Пожалуйста, введите свой класс';
                     }
-                    return null;
+                    else {
+                      classNum = value;
+                    }
+
+                  },
+                ),
+                TextFormField(
+                  decoration: const InputDecoration(
+                    hintText: 'Класс (нап. 11А)',
+                  ),
+                  validator: (String? value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Пожалуйста, введите свой класс';
+                    }
+                    else {
+                      classLit = value;
+                    }
+
                   },
                 ),
                 TextFormField(
@@ -87,18 +135,19 @@ class _LogInState extends State<LogIn> {
                     if (value == null || value.isEmpty) {
                       return 'Пароль не верный';
                     }
-                    return null;
+                    else {
+                      password = value;
+                    }
+
                   },
                 ),
                 ElevatedButton(
                   onPressed: () {
-                    // Validate will return true if the form is valid, or false if
-                    // the form is invalid.
                     if (_formKey.currentState!.validate()) {
-                      // Process data.
-                    }
-                  },
-                  child: const Text('Submit'),
+                      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => LoadingScreen(title: "")));
+                      }
+                    },
+                  child: const Text('Вход'),
                 ),
           ]
 
