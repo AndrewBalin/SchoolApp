@@ -119,22 +119,14 @@ class _LogInState extends State<LogIn> {
                       return 'Пожалуйста, введите свой класс';
                     }
                     else {
-                      val = value.toString().trim().split('');
-                      print(val);
+                      val = value.toString().trim().split('');;
                       classLit = val.last;
-                      print(classLit);
-                      print(val[0]);
-                      print(val[1]);
                       if(val.length == 3){
-                        print("писюн1");
                         classNum = val[0].toString() + val[1].toString();
                       }
                       else {
-                        print("писюн2");
                         classNum = val[0];
                       }
-                      print(classNum);
-                      print(classLit);
                     }
 
                   },
