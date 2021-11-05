@@ -42,7 +42,6 @@ class _LogInState extends State<LogIn> {
       appBar: AppBar(
         title: Text("Вход в приложение"),
       ),
-      drawer: DrawerStudent(title: 'App',),
       body: ListView(
         children: <Widget>[
           Form(

@@ -40,8 +40,12 @@ class _genBillState extends State<genBill> {
               ],)
           ],
         ),
-      ),
 
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        child: Icon(Icons.business_center),
+      ),
     );
   }
 }
