@@ -5,7 +5,6 @@ import 'package:schooapp/Screens/Students/grades.dart';
 import 'package:schooapp/Screens/Students/registration_screen.dart';
 import 'package:schooapp/Screens/Teachers/test.dart';
 import 'package:schooapp/data/Profile.dart';
-import 'package:schooapp/Screens/Teachers/test_create.dart';
 
 
 int _selectedDestination = 0;
@@ -120,7 +119,7 @@ class _DrawerState extends State<DrawerStudent> {
               selected: _selectedDestination == 3,
               onTap: () {
                 selectDestination(3);
-                Navigator.push(context, MaterialPageRoute(builder: (context) => TestCreate(title: "",)));
+
                 
               }
             ),
@@ -163,7 +162,7 @@ class _DrawerState extends State<DrawerStudent> {
             ),
             Padding(
               padding: const EdgeInsets.fromLTRB(16.0, 32.0, 0.0, 0.0),
-              child: Text("Alpha 0.0.7"),
+              child: Text("Alpha 0.0.9", style: TextStyle(color: Color(0xFF6200EE), fontSize: 20),),
             ),
           ],
         ),

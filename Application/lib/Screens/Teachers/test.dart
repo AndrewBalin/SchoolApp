@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:schooapp/Wigets/question_create.dart';
+import 'package:schooapp/Wigets/testCard.dart';
 import 'package:schooapp/Wigets/drawer.dart';
+import 'package:schooapp/Wigets/questionCard.dart';
 
 class genBill extends StatefulWidget {
   @override
@@ -9,49 +10,61 @@ class genBill extends StatefulWidget {
 }
 
 class _genBillState extends State<genBill> {
-  List<DynamicWidget> ListDynamic= [];
-  addDynamic(){
-    ListDynamic.add(DynamicWidget());
-    setState(() {
-
-    });
+  List<Widget> ListTest= [];
+  addDynamicTest(){
+    ListTest.add(NewTestCard());
+    setState(() {});
+  }
+  addDynamicQuestion(){
+    ListTest.add(NewQuestionCard());
+    setState(() {});
   }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Test"),
+        title: Text("Создание работы"),
       ),
       drawer: DrawerStudent(title: "",),
       body: Container(
         child: Column(
           children: [
             Flexible(child: ListView.builder(
-                itemCount: ListDynamic.length,
-                itemBuilder: (_, index) => ListDynamic[index])),
+                itemCount: ListTest.length,
+                itemBuilder: (_, index) => ListTest[index])),
             Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 TextButton(
-                  onPressed: addDynamic,
+                  onPressed: addDynamicTest,
                   child: Text(" + Тестовый вопрос"),),
                 TextButton(
-                  onPressed: () {},
+                  onPressed: addDynamicQuestion,
                   child: Text(" + Контрольный вопрос"),),
-              ],)
+              ],),
+            OutlineButton(
+              onPressed: () {},
+              child: Text("Сохранить работу"),
+            )
           ],
         ),
+
       ),
 
     );
   }
 }
 
-class DynamicWidget extends StatelessWidget{
+class NewTestCard extends StatelessWidget{
+  @override
+  Widget build(BuildContext context) {
+    return createTestCard();
+  }
+}
+class NewQuestionCard extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return Container(
-      child: createQuestionCard(size: size,),
-    );
+    return createQuestionCard(size: size,);
   }
 }

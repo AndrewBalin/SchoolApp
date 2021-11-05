@@ -24,6 +24,7 @@ class _LogInState extends State<LogIn> {
 
   @override
   Widget build(BuildContext context) {
+    var val;
     if(log == true) {
       Fluttertoast.showToast(
           msg: "Проверьте правильность ввода данных и подключение к сети!",
@@ -39,123 +40,179 @@ class _LogInState extends State<LogIn> {
     }
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Вход в приложение"),
-      ),
-      drawer: DrawerStudent(title: 'App',),
+
       body: ListView(
         children: <Widget>[
           Form(
             key: _formKey,
             child: Container(
               width: size.width * 60.0,
-              height: size.height,
+              //height: size.height,
               padding: EdgeInsets.all(0),
               margin: EdgeInsets.fromLTRB(25.0, 100.0, 25.0, 0.0) ,
-              alignment: Alignment.topCenter,
+              alignment: Alignment.center,
               child: ListView(
+                physics: const NeverScrollableScrollPhysics(),
                 scrollDirection: Axis.vertical,
                 shrinkWrap: true,
                 children: <Widget>[
+                Text("Вход в\n приложение", style: TextStyle(color: Color(0xFF6200EE), fontSize: 30, fontWeight: FontWeight.bold), textAlign: TextAlign.center,),
+                Padding(padding: EdgeInsets.all(10.0)),
                 TextFormField(
-                decoration: const InputDecoration(
-                hintText: 'Имя',
-                ),
-                validator: (String? value) {
+                decoration: InputDecoration(
+                    labelText: 'Имя Фамилия',
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(width: 3, color: Colors.blue),
+                      borderRadius: BorderRadius.circular(15),),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(width: 3, color: Color(0xFF6200EE)),
+                      borderRadius: BorderRadius.circular(15),)),
+                validator: (var value) {
                   if (value == null || value.isEmpty) {
-                    return 'Пожалуйста, введите своё имя';
-                }
-                  else {
-                    name = value;
-                  }
-
-              },
-            ),
-                TextFormField(
-                decoration: const InputDecoration(
-                  hintText: 'Фамилия',
-                ),
-                validator: (String? value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Пожалуйста, введите свою фамилию';
+                    return 'Пожалуйста, введите свои имя и фамилию';
                   }
                   else {
-                    surname = value;
+                    value = value.toString().trim();
+                    val = value.split(' ');
+                    name = val[0].toString();
+                    surname = val[1].toString();
                   }
+                  print(name);
+                  print(surname);
 
                 },
                 ),
+                Padding(padding: EdgeInsets.all(5.0)),
                 TextFormField(
-                  decoration: const InputDecoration(
-                    hintText: 'Школа',
-                  ),
+                  decoration: InputDecoration(
+                      labelText: 'Школа',
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(width: 3, color: Colors.blue),
+                        borderRadius: BorderRadius.circular(15),),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(width: 3, color: Color(0xFF6200EE)),
+                        borderRadius: BorderRadius.circular(15),)),
                   validator: (String? value) {
                     if (value == null || value.isEmpty) {
                       return 'Пожалуйста, введите свою школу';
                     }
                     else {
-                      school = value;
+                      school = value.toString();
+
                     }
+                    print(school);
 
                   },
                 ),
+                Padding(padding: EdgeInsets.all(5.0)),
                 TextFormField(
-                  decoration: const InputDecoration(
-                    hintText: 'Класс (нап. 11А)',
-                  ),
-                  validator: (String? value) {
+                  decoration: InputDecoration(
+                      labelText: 'Класс (Например: 10А)',
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(width: 3, color: Colors.blue),
+                        borderRadius: BorderRadius.circular(15),),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(width: 3, color: Color(0xFF6200EE)),
+                        borderRadius: BorderRadius.circular(15),)),
+                  validator: (var value) {
                     if (value == null || value.isEmpty) {
                       return 'Пожалуйста, введите свой класс';
                     }
                     else {
-                      classNum = value;
+                      val = value.toString().trim().split('');
+                      print(val);
+                      classLit = val.last;
+                      print(classLit);
+                      print(val[0]);
+                      print(val[1]);
+                      if(val.length == 3){
+                        print("писюн1");
+                        classNum = val[0].toString() + val[1].toString();
+                      }
+                      else {
+                        print("писюн2");
+                        classNum = val[0];
+                      }
+                      print(classNum);
+                      print(classLit);
                     }
 
                   },
                 ),
+                Padding(padding: EdgeInsets.all(5.0)),
                 TextFormField(
-                  decoration: const InputDecoration(
-                    hintText: 'Класс (нап. 11А)',
-                  ),
-                  validator: (String? value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Пожалуйста, введите свой класс';
-                    }
-                    else {
-                      classLit = value;
-                    }
-
-                  },
-                ),
-                TextFormField(
-                  decoration: const InputDecoration(
-                    hintText: 'Пароль',
-                  ),
+                  obscureText: true,
+                  decoration: InputDecoration(
+                      labelText: 'Пароль',
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(width: 3, color: Colors.blue),
+                        borderRadius: BorderRadius.circular(15),),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(width: 3, color: Color(0xFF6200EE)),
+                        borderRadius: BorderRadius.circular(15),)),
                   validator: (String? value) {
                     if (value == null || value.isEmpty) {
                       return 'Пароль не верный';
                     }
                     else {
                       password = value;
+                      print(password);
                     }
 
                   },
                 ),
-                ElevatedButton(
+                Padding(padding: EdgeInsets.all(10.0)),
+                RaisedButton(
+                  color: Color(0xFF6200EE),
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
                       Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => LoadingScreen(title: "")));
                       }
                     },
-                  child: const Text('Вход'),
+                  child: const Text('Вход', style: TextStyle(color: Colors.white, fontSize: 25),),
                 ),
+                Padding(padding: EdgeInsets.all(10.0)),
+                Align(
+                  alignment: Alignment.bottomCenter,
+                  child: Row(
+                    children: [
+                      OutlineButton(
+                        onPressed: () {  },
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(40)),
+                        highlightElevation: 0,
+                        borderSide: BorderSide(color: Colors.grey),
+                        child: Padding(
+                          padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
+                          child: Column(
+                            children: <Widget>[
+                            Row(
+                              mainAxisSize: MainAxisSize.min,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget>[
+                              Image(image: AssetImage("Assets/github.png"), height: 35.0),
+                              Padding(
+                                padding: const EdgeInsets.only(left: 10),
+                                child: Text("GitHub", style: TextStyle(
+                                            fontSize: 20, color: Colors.grey,)))
+
+
+                    ]
+                  )
+                ])
+              )
+            )
+
           ]
 
       ),
     ),
-          )
-    ]
+
+    ])
     )
-    );
+    ),
+
+    ]));
+
   }
 }
