@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:schooapp/Screens/Students/home_screen.dart';
-import 'package:schooapp/Screens/Students/notifications.dart';
-import 'package:schooapp/Screens/Students/grades.dart';
-import 'package:schooapp/Screens/Students/registration_screen.dart';
-import 'package:schooapp/Screens/Teachers/test.dart';
-import 'package:schooapp/data/Profile.dart';
+import 'package:schoolapp/Screens/Students/home_screen.dart';
+import 'package:schoolapp/Screens/Students/notifications.dart';
+import 'package:schoolapp/Screens/Students/grades.dart';
+import 'package:schoolapp/Screens/Students/registration_screen.dart';
+import 'package:schoolapp/Screens/Teachers/WorkCreate/workCreator.dart';
+import 'package:schoolapp/data/Profile.dart';
 
 
 int _selectedDestination = 0;
@@ -69,7 +69,7 @@ class _DrawerState extends State<DrawerStudent> {
                     Align(
                       alignment: Alignment.centerRight+Alignment(0, .4),
                       child: Text(
-                        '$c"$l"|$id',
+                        '$id',
                         style: TextStyle(color: Colors.white, fontSize: 14), /*textTheme.headline6,*/
                       ),
                     )
@@ -129,7 +129,6 @@ class _DrawerState extends State<DrawerStudent> {
               selected: _selectedDestination == 4,
               onTap: () {
                 selectDestination(4);
-                Navigator.push(context, MaterialPageRoute(builder: (context) => genBill()));
                 },
             ),
             ListTile(
@@ -163,6 +162,14 @@ class _DrawerState extends State<DrawerStudent> {
             Padding(
               padding: const EdgeInsets.fromLTRB(16.0, 32.0, 0.0, 0.0),
               child: Text("Alpha 0.0.9", style: TextStyle(color: Color(0xFF6200EE), fontSize: 20),),
+            ),
+            ListTile(
+
+              title: Text('Выход', style: TextStyle(color: Colors.red),),
+
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) => LogIn(title: '')));
+              },
             ),
           ],
         ),

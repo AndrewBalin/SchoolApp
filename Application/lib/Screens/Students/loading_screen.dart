@@ -1,9 +1,9 @@
 import 'dart:async';
-import 'dart:math';
-import 'package:schooapp/data/Profile.dart';
+import 'package:schoolapp/data/Profile.dart';
 import 'package:flutter/material.dart';
-import 'package:schooapp/Screens/Students/home_screen.dart';
-import 'package:schooapp/Screens/Students/registration_screen.dart';
+import 'package:schoolapp/Screens/Students/home_screen.dart';
+import 'package:schoolapp/Screens/Students/registration_screen.dart';
+import 'package:schoolapp/Screens/Teachers/teacherScreen.dart';
 
 
 
@@ -23,17 +23,30 @@ class _LoadingScreenState extends State<LoadingScreen>
   @override
   Widget build(BuildContext context) {
 
-    var temp = reg(name, surname, classNum, classLit, school, password);
+    var temp = reg(name, surname, patronymic, school, password);
 
     Future.delayed(Duration(seconds: 3), () async {
-      if (registr) {
-        log = false;
-        Navigator.pushReplacement(context,
-            MaterialPageRoute(builder: (context) => WorksPage(title: "")));
-      } else {
-        log = true;
-        Navigator.pushReplacement(context,
-            MaterialPageRoute(builder: (context) => LogIn(title: '',)));
+      if(!teacher) {
+        if (registr) {
+          log = false;
+          Navigator.pushReplacement(context,
+              MaterialPageRoute(builder: (context) => WorksPage(title: "")));
+        } else {
+          log = true;
+          Navigator.pushReplacement(context,
+              MaterialPageRoute(builder: (context) => LogIn(title: '',)));
+        }
+      }
+      else {
+        if (registr) {
+          log = false;
+          Navigator.pushReplacement(context,
+              MaterialPageRoute(builder: (context) => TeacherPage(title: '',)));
+        } else {
+          log = true;
+          Navigator.pushReplacement(context,
+              MaterialPageRoute(builder: (context) => LogIn(title: '',)));
+        }
       }
     });
 

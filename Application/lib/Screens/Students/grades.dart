@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:schooapp/Wigets/drawer.dart';
+import 'package:schoolapp/Wigets/drawer.dart';
 
 class Grades extends StatefulWidget {
   final String title;

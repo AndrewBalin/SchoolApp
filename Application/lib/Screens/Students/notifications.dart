@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:schooapp/Wigets/drawer.dart';
-import 'package:schooapp/Wigets/notification.dart';
+import 'package:schoolapp/Wigets/drawer.dart';
+import 'package:schoolapp/Wigets/notification.dart';
 
 class Notifications extends StatefulWidget {
   final String title;

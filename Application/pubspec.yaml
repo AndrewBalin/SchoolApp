@@ -1,4 +1,4 @@
-name: schooapp
+name: schoolapp
 description: A hakaton project
 
 # The following line prevents the package from being accidentally published to
@@ -30,6 +30,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   http: ^0.13.3
   fluttertoast: ^8.0.8
+  built_value: ^8.1.3
 
 dev_dependencies:
   flutter_test:

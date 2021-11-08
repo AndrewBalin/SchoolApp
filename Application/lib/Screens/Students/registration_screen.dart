@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:schooapp/Wigets/drawer.dart';
-import 'package:schooapp/Screens/Students/loading_screen.dart';
-import 'package:schooapp/data/Profile.dart';
+import 'package:schoolapp/Wigets/drawer.dart';
+import 'package:schoolapp/Screens/Students/loading_screen.dart';
+import 'package:schoolapp/data/Profile.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:schooapp/main.dart';
+import 'package:schoolapp/main.dart';
 
 bool registr = false;
 bool log = false;
-var name, surname, classNum, classLit, school, password;
+var name, surname, patronymic, school, password;
 
 class LogIn extends StatefulWidget {
   final String title;
@@ -60,7 +60,7 @@ class _LogInState extends State<LogIn> {
                 Padding(padding: EdgeInsets.all(10.0)),
                 TextFormField(
                 decoration: InputDecoration(
-                    labelText: 'Имя Фамилия',
+                    labelText: 'Фамилия Имя Отчество',
                     enabledBorder: OutlineInputBorder(
                       borderSide: BorderSide(width: 3, color: Colors.blue),
                       borderRadius: BorderRadius.circular(15),),
@@ -69,13 +69,18 @@ class _LogInState extends State<LogIn> {
                       borderRadius: BorderRadius.circular(15),)),
                 validator: (var value) {
                   if (value == null || value.isEmpty) {
-                    return 'Пожалуйста, введите свои имя и фамилию';
+                    return 'Пожалуйста, введите свои ФИО';
                   }
                   else {
-                    value = value.toString().trim();
-                    val = value.split(' ');
-                    name = val[0].toString();
-                    surname = val[1].toString();
+                    try {
+                      value = value.toString().trim();
+                      val = value.split(' ');
+                      name = val[1].toString();
+                      surname = val[0].toString();
+                      patronymic = val[2].toString();
+                    } catch (e) {
+                      return 'Введиде фамилию, имя и отчество через пробел';
+                    }
                   }
                   print(name);
                   print(surname);
@@ -106,33 +111,6 @@ class _LogInState extends State<LogIn> {
                 ),
                 Padding(padding: EdgeInsets.all(5.0)),
                 TextFormField(
-                  decoration: InputDecoration(
-                      labelText: 'Класс (Например: 10А)',
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(width: 3, color: Colors.blue),
-                        borderRadius: BorderRadius.circular(15),),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(width: 3, color: Color(0xFF6200EE)),
-                        borderRadius: BorderRadius.circular(15),)),
-                  validator: (var value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Пожалуйста, введите свой класс';
-                    }
-                    else {
-                      val = value.toString().trim().split('');;
-                      classLit = val.last;
-                      if(val.length == 3){
-                        classNum = val[0].toString() + val[1].toString();
-                      }
-                      else {
-                        classNum = val[0];
-                      }
-                    }
-
-                  },
-                ),
-                Padding(padding: EdgeInsets.all(5.0)),
-                TextFormField(
                   obscureText: true,
                   decoration: InputDecoration(
                       labelText: 'Пароль',
@@ -153,7 +131,24 @@ class _LogInState extends State<LogIn> {
 
                   },
                 ),
-                Padding(padding: EdgeInsets.all(10.0)),
+                Padding(padding: EdgeInsets.all(5.0)),
+                Container(
+                    padding: const EdgeInsets.all(8.0),
+                    decoration: BoxDecoration(
+                      border: Border.all(width: 3, color: Colors.blue),
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+
+                    child: CheckboxListTile(
+                      title: Text("Я учитель"),
+                      value: teacher,
+                      onChanged: (newValue) {
+                        setState(() {
+                          teacher = newValue!;
+                        });
+                      },
+                    )),
+                Padding(padding: EdgeInsets.all(5.0)),
                 RaisedButton(
                   color: Color(0xFF6200EE),
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),

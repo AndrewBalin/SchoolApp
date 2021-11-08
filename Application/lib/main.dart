@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:schooapp/Wigets/drawer.dart';
-import 'package:schooapp/Screens/Students/home_screen.dart';
-import 'package:schooapp/Screens/Students/registration_screen.dart';
+import 'package:schoolapp/Wigets/drawer.dart';
+import 'package:schoolapp/Screens/Students/home_screen.dart';
+import 'package:schoolapp/Screens/Students/registration_screen.dart';
 
 void main() {
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
