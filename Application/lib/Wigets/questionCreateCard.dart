@@ -1,20 +1,58 @@
+import 'dart:async';
+import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:schoolapp/Screens/Teachers/WorkCreate/workCreator.dart';
 
 class createQuestionCard extends StatefulWidget {
   final question_number;
   createQuestionCard({Key? key, this.question_number}) : super(key: key);
 
   @override
-
-  _createQuestionCardState createState() => _createQuestionCardState(question_number: question_number);
+  createQuestionCardState createState() => createQuestionCardState(question_number: question_number);
 }
 
-class _createQuestionCardState extends State<createQuestionCard> {
+class createQuestionCardState extends State<createQuestionCard> {
   //final _formKey = GlobalKey<FormState>();
   final question_number;
-  var x = 0.0;
-  var i = 2;
-  _createQuestionCardState({this.question_number});
+  createQuestionCardState({this.question_number});
+
+  var _name;
+  var _trueAnswer;
+
+  StreamSubscription? streamSubscription;
+  var numCheck;
+
+  @override
+  initState() {
+    streamSubscription = genWork.model.SUBMITER.listen((newVal) {
+      numCheck = newVal!;
+      if(numCheck == '$question_number'){
+        print(1);
+        submitData();
+      }
+
+    });
+
+    super.initState();
+  }
+
+  final GlobalKey<FormState> _testQuestionTextKey = GlobalKey<FormState>();
+
+  submitData(){
+    if (!_testQuestionTextKey.currentState!.validate()) {}
+    _testQuestionTextKey.currentState!.save();
+    int number = question_number;
+    QuestionData? _result = new QuestionData(number, _name, _trueAnswer);
+    var json_result = (jsonEncode(_result));
+    genWorkState().questions.add(json_result);
+  }
+
+    @override
+    void dispose() {
+      streamSubscription?.cancel();
+      super.dispose();
+    }
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +73,9 @@ class _createQuestionCardState extends State<createQuestionCard> {
             ),
           ],
         ),
-        child:  ListView(
+        child: Form(
+        key: _testQuestionTextKey,
+        child: ListView(
             physics: const NeverScrollableScrollPhysics(),
             children: <Widget>[
               Row(
@@ -51,7 +91,15 @@ class _createQuestionCardState extends State<createQuestionCard> {
                     ),
                     Padding(padding: EdgeInsets.all(10.0),),
                     Flexible(
-                        child: TextFormField(validator: (value) {},
+                        child: TextFormField(
+                          validator: (String? value) {
+                            if(value!.isEmpty){
+                              return "Название вопроса не может быть пустым";
+                            }
+                          },
+                          onSaved: (String? value){
+                            _name = value;
+                          },
                           decoration: InputDecoration(
                               labelText: 'Название вопроса',
                               enabledBorder: OutlineInputBorder(
@@ -63,9 +111,16 @@ class _createQuestionCardState extends State<createQuestionCard> {
                           ),
                         ))
                   ]),
-              Padding(padding: EdgeInsets.all(15.0)),
-              Padding(padding: EdgeInsets.all(15.0)),
-              TextFormField(validator: (value) {},
+              Padding(padding: EdgeInsets.all(20.0)),
+              TextFormField(
+                  validator: (String? value) {
+                    if(value!.isEmpty){
+                      return "Введите правильный ответ на вопрос";
+                    }
+                  },
+                  onSaved: (String? value){
+                    _trueAnswer = value;
+                  },
                   decoration: InputDecoration(
                       labelText: 'Правильный ответ',
                       enabledBorder: OutlineInputBorder(
@@ -79,10 +134,27 @@ class _createQuestionCardState extends State<createQuestionCard> {
             ])
 
 
-    );
+        ));
 
 
 
   }
 
+}
+
+class QuestionData {
+
+  final int number;
+  final String name, trueAnswer;
+
+  const QuestionData(
+      this.number,
+      this.name,
+      this.trueAnswer);
+
+  Map toJson() => {
+    'number': number,
+    'name': name,
+    'truing': trueAnswer
+  };
 }

@@ -1,22 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:schoolapp/data/Profile.dart';
 
-class createThemeCard extends StatefulWidget {
+int count = 0;
 
-  createThemeCard({Key? key}) : super(key: key);
+class workSavePage extends StatefulWidget {
+
+  workSavePage({Key? key}) : super(key: key);
 
   @override
 
-  _createThemeCardState createState() => _createThemeCardState();
+  _workSavePageState createState() => _workSavePageState();
 }
 
-class _createThemeCardState extends State<createThemeCard> {
-  //final _formKey = GlobalKey<FormState>();
+class _workSavePageState extends State<workSavePage> {
 
+  //List classes = ProfileClasses;
+
+
+
+
+  @override
   Widget build(BuildContext context) {
-
-    @override
-
-    Size size = MediaQuery.of(context).size;
     return Scaffold(
         appBar: AppBar(title: Text('Настройки работы')),
         body: ListView(
@@ -24,7 +28,7 @@ class _createThemeCardState extends State<createThemeCard> {
             children: <Widget>[
               TextFormField(validator: (value) {},
                 decoration: InputDecoration(
-                    labelText: 'Название работы',
+                    labelText: 'Отправить классам',
                     enabledBorder: OutlineInputBorder(
                       borderSide: BorderSide(width: 3, color: Colors.red),
                       borderRadius: BorderRadius.circular(15),),
@@ -36,7 +40,7 @@ class _createThemeCardState extends State<createThemeCard> {
               Padding(padding: EdgeInsets.all(8.0)),
               TextFormField(validator: (value) {},
                   decoration: InputDecoration(
-                      labelText: 'Тема работы',
+                      labelText: '',
                       enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(width: 3, color: Colors.red),
                         borderRadius: BorderRadius.circular(15),),
@@ -64,5 +68,7 @@ class _createThemeCardState extends State<createThemeCard> {
 
   }
 }
+
+
 
 

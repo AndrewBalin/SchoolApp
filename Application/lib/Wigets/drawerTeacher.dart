@@ -4,6 +4,7 @@ import 'package:schoolapp/Screens/Students/notifications.dart';
 import 'package:schoolapp/Screens/Students/grades.dart';
 import 'package:schoolapp/Screens/Students/registration_screen.dart';
 import 'package:schoolapp/Screens/Teachers/WorkCreate/workCreator.dart';
+import 'package:schoolapp/Screens/Teachers/teacherScreen.dart';
 import 'package:schoolapp/data/Profile.dart';
 
 
@@ -88,7 +89,7 @@ class _DrawerState extends State<DrawerTeacher> {
               selected: _selectedDestination == 0,
               onTap: () {
                 selectDestination(0);
-                Navigator.push(context, MaterialPageRoute(builder: (context) => genWork()));
+                Navigator.push(context, MaterialPageRoute(builder: (context) => TeacherPage(title: '')));
               }
           ),
           ListTile(
@@ -125,6 +126,12 @@ class _DrawerState extends State<DrawerTeacher> {
             selected: _selectedDestination == 6,
             onTap: () => selectDestination(6),
           ),
+          ListTile(
+            leading: Icon(Icons.devices),
+            title: Text('Уроки'),
+            selected: _selectedDestination == 9,
+            onTap: () => selectDestination(9),
+          ),
           Divider(
             height: 1,
             thickness: 1,
@@ -143,14 +150,14 @@ class _DrawerState extends State<DrawerTeacher> {
           ),
           Padding(
             padding: const EdgeInsets.fromLTRB(16.0, 32.0, 0.0, 0.0),
-            child: Text("Alpha 0.0.9", style: TextStyle(color: Color(0xFF6200EE), fontSize: 20),),
+            child: Text("Alpha 0.0.12", style: TextStyle(color: Color(0xFF6200EE), fontSize: 20),),
           ),
           ListTile(
 
             title: Text('Выход', style: TextStyle(color: Colors.red),),
 
             onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => LogIn(title: '')));
+              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => LogIn(title: '')));
             },
           ),
         ],

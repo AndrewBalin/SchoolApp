@@ -1,8 +1,8 @@
+import 'dart:async';
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'dart:convert';
-
-var SUBMITER = false;
+import 'package:schoolapp/Screens/Teachers/WorkCreate/workCreator.dart';
 
 class createTestCard extends StatefulWidget {
   final question_number;
@@ -17,26 +17,38 @@ class createTestCardState extends State<createTestCard>{
   final question_number;
 
   var x = 0.0;
-  var i = 1;
+  var i = 2;
+
   createTestCardState({this.question_number});
-  bool first = true;
 
   var _questionName;
   var _trueAnswers;
   var _answersCount;
   var _result;
 
+  StreamSubscription? streamSubscriptionTest;
+  var numCheck;
+
+  @override
+  initState() {
+    super.initState();
+    streamSubscriptionTest = genWork.model.SUBMITER.listen((newVal) {
+      numCheck = newVal;
+      if(numCheck == '$question_number'){
+        submitData();
+      }
+
+    });
+
+
+  }
+
   List _answers = [];
 
   final GlobalKey<FormState> _testQuestionKey = GlobalKey<FormState>();
 
-  List<NewTestQuestion> ListTest= [];
+  List<NewTestQuestion> ListTest= [NewTestQuestion(number: 1)];
 
-  firstInit(){
-    ListTest.add(NewTestQuestion(number: i));
-    i++;
-    first = false;
-  }
 
   addDynamicQuestion(){
     ListTest.add(NewTestQuestion(number: i));
@@ -51,23 +63,25 @@ class createTestCardState extends State<createTestCard>{
     _trueAnswers = _trueAnswers.split(', ');
     for (int n = 0; n < (ListTest.length); n++){
       _answers.add(ListTest[n].controller.text.toString());
-      print(ListTest[n].controller.text);
-      print(_answers);
     }
     print("$question_number, $_questionName, $_answersCount, $_answers, $_trueAnswers");
     TestData _result = new TestData(question_number, _questionName, _answersCount, _answers, _trueAnswers);
-    print(jsonEncode(_result));
+    var json_result = jsonEncode(_result);
+    genWorkState().questions.add(json_result);
   }
 
   @override
+  void dispose() {
+    streamSubscriptionTest?.cancel();
+    super.dispose();
+  }
+
+    @override
   Widget build(BuildContext context) {
-    if(first) {firstInit();}
-
     Size size = MediaQuery.of(context).size;
-
     return Container(
       width: size.width * 0.98,
-      height: 415.0 + x,
+      height: 315.0 + x,
       padding: EdgeInsets.all(5.0),
       margin: EdgeInsets.fromLTRB(5.0, 3.0, 5.0, 3.0),
       decoration: BoxDecoration(
@@ -106,7 +120,7 @@ class createTestCardState extends State<createTestCard>{
                 }
               },
               onSaved: (String? value){
-                _questionName = value!;
+                _questionName = value;
               },
               decoration: InputDecoration(
                   labelText: 'Название вопроса',
@@ -130,7 +144,7 @@ class createTestCardState extends State<createTestCard>{
                }
                 },
               onSaved: (String? value){
-                _trueAnswers = value!;
+                _trueAnswers = value;
               },
               decoration: InputDecoration(
                   labelText: "Номера правильных ответов (нап. '1, 3')",
@@ -165,13 +179,7 @@ class createTestCardState extends State<createTestCard>{
                 },
                 child: Text(" + Вариант ответа"),),
         ),
-          ValueListenableBuilder(
-            valueListenable: SUBMITER,
-            builder: (context, value, widget) {
-              submitData();
-              return SizedBox.shrink();
-            },
-          ),
+
         ])
     ));
   }

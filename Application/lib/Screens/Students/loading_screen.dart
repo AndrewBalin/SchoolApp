@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:schoolapp/Screens/Students/home_screen.dart';
 import 'package:schoolapp/Screens/Students/registration_screen.dart';
 import 'package:schoolapp/Screens/Teachers/teacherScreen.dart';
-
+import 'package:flutter_svg/flutter_svg.dart';
 
 
 class LoadingScreen extends StatefulWidget {
@@ -51,8 +51,6 @@ class _LoadingScreenState extends State<LoadingScreen>
     });
 
 
-
-      Size size = MediaQuery.of(context).size;
       return Scaffold(
           appBar: AppBar(
             title: Text("Загрузка"),

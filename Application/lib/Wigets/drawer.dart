@@ -161,14 +161,14 @@ class _DrawerState extends State<DrawerStudent> {
             ),
             Padding(
               padding: const EdgeInsets.fromLTRB(16.0, 32.0, 0.0, 0.0),
-              child: Text("Alpha 0.0.9", style: TextStyle(color: Color(0xFF6200EE), fontSize: 20),),
+              child: Text("Alpha 0.0.12", style: TextStyle(color: Color(0xFF6200EE), fontSize: 20),),
             ),
             ListTile(
 
               title: Text('Выход', style: TextStyle(color: Colors.red),),
 
               onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => LogIn(title: '')));
+                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => LogIn(title: '')));
               },
             ),
           ],

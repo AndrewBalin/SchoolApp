@@ -4,6 +4,7 @@ import 'package:schoolapp/Screens/Students/registration_screen.dart';
 var n, f, c, l, s, id;
 var t;
 var teacher = false;
+var ProfileClasses;
 
 
 Future<String> reg(name, surname, patronymic, school, password) async{
@@ -23,5 +24,12 @@ Future<String> reg(name, surname, patronymic, school, password) async{
   }else{
     registr = false;
   }
+
+  if(teacher){
+    var resp = await http.get(Uri.parse(
+        "http://a0595760.xsph.ru/?n='$name'&f='$surname'&o='$patronymic'&s='$school'&p='$password'&t='$teacher'"));
+    
+  }
+
   return response.body.toString();
 }

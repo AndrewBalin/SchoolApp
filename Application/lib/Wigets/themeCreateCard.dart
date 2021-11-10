@@ -1,4 +1,7 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:schoolapp/Screens/Teachers/WorkCreate/workCreator.dart';
 
 class createThemeCard extends StatefulWidget {
 
@@ -11,15 +14,43 @@ class createThemeCard extends StatefulWidget {
 
 class _createThemeCardState extends State<createThemeCard> {
   //final _formKey = GlobalKey<FormState>();
-  var x = 0.0;
-  var i = 2;
+  var SUBMITER = false;
 
   var dropdownvalue = 'Алгебра';
   var items =  ['Алгебра','Геометрия','Русский язык','Литература','История','Обществознание'];
 
-  Widget build(BuildContext context) {
+  var _themeName;
+  var _themeTheme;
+  var _itogs;
+
+  final GlobalKey<FormState> _testThemeKey = GlobalKey<FormState>();
+
+  StreamSubscription? streamSubscriptionTheme;
+  var NumCheck;
 
   @override
+
+  initState() {
+    streamSubscriptionTheme = genWork.model.SUBMITER.listen((newVal) {
+          NumCheck = newVal;
+          if (NumCheck == 'theme') {
+            submitData();
+          }
+        });
+    super.initState();
+  }
+    submitData(){
+      if (!_testThemeKey.currentState!.validate()) {}
+      _testThemeKey.currentState!.save();
+      _itogs = _itogs.split(', ');
+      themedata.add(_themeName);
+      themedata.add(_themeTheme);
+      themedata.add(_itogs);
+      themedata.add(dropdownvalue);
+    }
+
+  @override
+  Widget build(BuildContext context) {
 
     Size size = MediaQuery.of(context).size;
     return Container(
@@ -38,22 +69,40 @@ class _createThemeCardState extends State<createThemeCard> {
             ),
           ],
         ),
-        child:  ListView(
+        child: Form(
+        key: _testThemeKey,
+        child: ListView(
             physics: const NeverScrollableScrollPhysics(),
             children: <Widget>[
-              TextFormField(validator: (value) {},
-                          decoration: InputDecoration(
-                              labelText: 'Название работы',
-                              enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide(width: 3, color: Colors.red),
-                                borderRadius: BorderRadius.circular(15),),
-                              focusedBorder: OutlineInputBorder(
-                                borderSide: BorderSide(width: 3, color: Colors.blue),
-                                borderRadius: BorderRadius.circular(15),)
-                          ),
-                        ),
+              TextFormField(
+                  validator: (String? value) {
+                    if(value!.isEmpty){
+                      return "Назовите работу";
+                    }
+                  },
+                  onSaved: (String? value){
+                    _themeName = value;
+                  },
+                  decoration: InputDecoration(
+                      labelText: 'Название работы',
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(width: 3, color: Colors.red),
+                        borderRadius: BorderRadius.circular(15),),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(width: 3, color: Colors.blue),
+                        borderRadius: BorderRadius.circular(15),)
+                  ),
+                ),
               Padding(padding: EdgeInsets.all(8.0)),
-              TextFormField(validator: (value) {},
+              TextFormField(
+                  validator: (String? value) {
+                    if(value!.isEmpty){
+                      return "Напишите тему работы";
+                    }
+                  },
+                  onSaved: (String? value){
+                    _themeTheme = value;
+                  },
                   decoration: InputDecoration(
                       labelText: 'Тема работы',
                       enabledBorder: OutlineInputBorder(
@@ -89,7 +138,15 @@ class _createThemeCardState extends State<createThemeCard> {
                   },
               ))),
               Padding(padding: EdgeInsets.all(8.0)),
-              TextFormField(validator: (value) {},
+              TextFormField(
+                  validator: (String? value) {
+                    if(value!.isEmpty){
+                      return "Напишите количество правильных ответов";
+                    }
+                  },
+                  onSaved: (String? value){
+                    _itogs = value;
+                  },
                   decoration: InputDecoration(
                       labelText: 'Правильных ответов на оценки 3, 4, 5',
                       enabledBorder: OutlineInputBorder(
@@ -103,10 +160,12 @@ class _createThemeCardState extends State<createThemeCard> {
             ])
 
 
-    );
+    ));
 
 
 
   }
 
 }
+
+

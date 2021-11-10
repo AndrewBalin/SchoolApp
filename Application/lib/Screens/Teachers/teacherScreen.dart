@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:schoolapp/Wigets/drawerTeacher.dart';
 import 'package:schoolapp/Wigets/workStudent.dart';
-import 'package:schoolapp/Screens/Students/test_demo.dart';
+import 'package:schoolapp/Screens/Teachers/WorkCreate/workCreator.dart';
+
+List WorkList = [];
 
 class TeacherPage extends StatefulWidget {
   final String title;
@@ -23,15 +25,22 @@ class _TeacherPageState extends State<TeacherPage> {
       ),
       drawer: DrawerTeacher(title: 'App',),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {  },
+        onPressed: () {
+          Navigator.push(context, MaterialPageRoute(builder: (context) => genWork()));
+        },
         child: Icon(Icons.add)
       ),
-      body: ListView(
-          children: <Widget>[
-            Text("Учитель")
-          ]
+      body: RefreshIndicator(
+          color: Color(0xFF6200EE),
+          onRefresh: () async {
+            //Do whatever you want on refrsh.Usually update the date of the listview
+          },
+          child:ListView(
 
-      ),
+          )
+      )
+
+
     );
   }
 }
