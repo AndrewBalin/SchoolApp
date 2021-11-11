@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:schoolapp/Screens/Students/home_screen.dart';
 import 'package:schoolapp/Screens/Students/notifications.dart';
 import 'package:schoolapp/Screens/Students/grades.dart';
 import 'package:schoolapp/Screens/Students/registration_screen.dart';
 import 'package:schoolapp/Screens/Teachers/WorkCreate/workCreator.dart';
+import 'package:schoolapp/Screens/Teachers/lessons.dart';
 import 'package:schoolapp/Screens/Teachers/teacherScreen.dart';
 import 'package:schoolapp/data/Profile.dart';
 
@@ -118,19 +120,42 @@ class _DrawerState extends State<DrawerTeacher> {
             leading: Icon(Icons.people),
             title: Text('Классы'),
             selected: _selectedDestination == 5,
-            onTap: () => selectDestination(5),
+            onTap: () {
+              selectDestination(5);
+              Fluttertoast.showToast(
+                  msg: "В РАЗРАБОТКЕ!",
+                  toastLength: Toast.LENGTH_SHORT,
+                  gravity: ToastGravity.CENTER,
+                  timeInSecForIosWeb: 1,
+                  backgroundColor: Colors.red,
+                  textColor: Colors.white,
+                  fontSize: 16.0);
+            },
           ),
           ListTile(
             leading: Icon(Icons.question_answer),
             title: Text('Сообщения'),
             selected: _selectedDestination == 6,
-            onTap: () => selectDestination(6),
+            onTap: () {
+              selectDestination(6);
+              Fluttertoast.showToast(
+                  msg: "В РАЗРАБОТКЕ!",
+                  toastLength: Toast.LENGTH_SHORT,
+                  gravity: ToastGravity.CENTER,
+                  timeInSecForIosWeb: 1,
+                  backgroundColor: Colors.red,
+                  textColor: Colors.white,
+                  fontSize: 16.0);
+            },
           ),
           ListTile(
             leading: Icon(Icons.devices),
             title: Text('Уроки'),
-            selected: _selectedDestination == 9,
-            onTap: () => selectDestination(9),
+            selected: _selectedDestination == 7,
+            onTap: () {
+              selectDestination(7);
+              Navigator.push(context, MaterialPageRoute(builder: (context) => LessonStart(title: "")));
+            },
           ),
           Divider(
             height: 1,
@@ -139,14 +164,34 @@ class _DrawerState extends State<DrawerTeacher> {
           ListTile(
             leading: Icon(Icons.feedback),
             title: Text('Помощь'),
-            selected: _selectedDestination == 7,
-            onTap: () => selectDestination(7),
+            selected: _selectedDestination == 8,
+            onTap: () {
+              selectDestination(8);
+              Fluttertoast.showToast(
+                  msg: "В РАЗРАБОТКЕ!",
+                  toastLength: Toast.LENGTH_SHORT,
+                  gravity: ToastGravity.CENTER,
+                  timeInSecForIosWeb: 1,
+                  backgroundColor: Colors.red,
+                  textColor: Colors.white,
+                  fontSize: 16.0);
+            },
           ),
           ListTile(
             leading: Icon(Icons.info),
             title: Text('О приложении'),
-            selected: _selectedDestination == 8,
-            onTap: () => selectDestination(8),
+            selected: _selectedDestination == 9,
+            onTap: () {
+              selectDestination(9);
+              Fluttertoast.showToast(
+                  msg: "В РАЗРАБОТКЕ!",
+                  toastLength: Toast.LENGTH_SHORT,
+                  gravity: ToastGravity.CENTER,
+                  timeInSecForIosWeb: 1,
+                  backgroundColor: Colors.red,
+                  textColor: Colors.white,
+                  fontSize: 16.0);
+            },
           ),
           Padding(
             padding: const EdgeInsets.fromLTRB(16.0, 32.0, 0.0, 0.0),

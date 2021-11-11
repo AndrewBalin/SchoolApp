@@ -92,14 +92,6 @@ class createQuestionCardState extends State<createQuestionCard> {
                     Padding(padding: EdgeInsets.all(10.0),),
                     Flexible(
                         child: TextFormField(
-                          validator: (String? value) {
-                            if(value!.isEmpty){
-                              return "Название вопроса не может быть пустым";
-                            }
-                          },
-                          onSaved: (String? value){
-                            _name = value;
-                          },
                           decoration: InputDecoration(
                               labelText: 'Название вопроса',
                               enabledBorder: OutlineInputBorder(
@@ -109,8 +101,24 @@ class createQuestionCardState extends State<createQuestionCard> {
                                 borderSide: BorderSide(width: 3, color: Colors.red),
                                 borderRadius: BorderRadius.circular(15),)
                           ),
-                        ))
-                  ]),
+                        validator: (var value) {
+                          if (value == null || value.isEmpty) {
+                            Fluttertoast.showToast(
+                                msg: "Не все поля заполнены!",
+                                toastLength: Toast.LENGTH_SHORT,
+                                gravity: ToastGravity.CENTER,
+                                timeInSecForIosWeb: 1,
+                                backgroundColor: Colors.red,
+                                textColor: Colors.white,
+                                fontSize: 16.0);
+                          }
+                          else {
+                            _name = value.toString();
+
+                          }
+                        }
+                        )
+                    )]),
               Padding(padding: EdgeInsets.all(20.0)),
               TextFormField(
                   validator: (String? value) {

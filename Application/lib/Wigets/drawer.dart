@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:schoolapp/Screens/Students/home_screen.dart';
 import 'package:schoolapp/Screens/Students/notifications.dart';
 import 'package:schoolapp/Screens/Students/grades.dart';
@@ -118,9 +119,15 @@ class _DrawerState extends State<DrawerStudent> {
               title: Text('Прогресс'),
               selected: _selectedDestination == 3,
               onTap: () {
-                selectDestination(3);
-
-                
+              selectDestination(3);
+                Fluttertoast.showToast(
+                    msg: "В РАЗРАБОТКЕ!",
+                    toastLength: Toast.LENGTH_SHORT,
+                    gravity: ToastGravity.CENTER,
+                    timeInSecForIosWeb: 1,
+                    backgroundColor: Colors.red,
+                    textColor: Colors.white,
+                    fontSize: 16.0);
               }
             ),
             ListTile(
@@ -129,19 +136,63 @@ class _DrawerState extends State<DrawerStudent> {
               selected: _selectedDestination == 4,
               onTap: () {
                 selectDestination(4);
+                Fluttertoast.showToast(
+                    msg: "В РАЗРАБОТКЕ!",
+                    toastLength: Toast.LENGTH_SHORT,
+                    gravity: ToastGravity.CENTER,
+                    timeInSecForIosWeb: 1,
+                    backgroundColor: Colors.red,
+                    textColor: Colors.white,
+                    fontSize: 16.0);
                 },
             ),
             ListTile(
               leading: Icon(Icons.people),
               title: Text('Класс'),
               selected: _selectedDestination == 5,
-              onTap: () => selectDestination(5),
+              onTap: () {
+                selectDestination(5);
+                Fluttertoast.showToast(
+                    msg: "В РАЗРАБОТКЕ!",
+                    toastLength: Toast.LENGTH_SHORT,
+                    gravity: ToastGravity.CENTER,
+                    timeInSecForIosWeb: 1,
+                    backgroundColor: Colors.red,
+                    textColor: Colors.white,
+                    fontSize: 16.0);
+              },
             ),
             ListTile(
               leading: Icon(Icons.question_answer),
               title: Text('Сообщения'),
               selected: _selectedDestination == 6,
-              onTap: () => selectDestination(6),
+              onTap: () {
+                selectDestination(6);
+                Fluttertoast.showToast(
+                    msg: "В РАЗРАБОТКЕ!",
+                    toastLength: Toast.LENGTH_SHORT,
+                    gravity: ToastGravity.CENTER,
+                    timeInSecForIosWeb: 1,
+                    backgroundColor: Colors.red,
+                    textColor: Colors.white,
+                    fontSize: 16.0);
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.devices),
+              title: Text('Уроки'),
+              selected: _selectedDestination == 6,
+              onTap: () {
+                selectDestination(6);
+                Fluttertoast.showToast(
+                    msg: "В РАЗРАБОТКЕ!",
+                    toastLength: Toast.LENGTH_SHORT,
+                    gravity: ToastGravity.CENTER,
+                    timeInSecForIosWeb: 1,
+                    backgroundColor: Colors.red,
+                    textColor: Colors.white,
+                    fontSize: 16.0);
+              },
             ),
             Divider(
               height: 1,
@@ -151,7 +202,17 @@ class _DrawerState extends State<DrawerStudent> {
               leading: Icon(Icons.feedback),
               title: Text('Помощь'),
               selected: _selectedDestination == 7,
-              onTap: () => selectDestination(7),
+              onTap: () {
+                selectDestination(7);
+                Fluttertoast.showToast(
+                    msg: "В РАЗРАБОТКЕ!",
+                    toastLength: Toast.LENGTH_SHORT,
+                    gravity: ToastGravity.CENTER,
+                    timeInSecForIosWeb: 1,
+                    backgroundColor: Colors.red,
+                    textColor: Colors.white,
+                    fontSize: 16.0);
+              },
             ),
             ListTile(
               leading: Icon(Icons.info),
@@ -161,7 +222,7 @@ class _DrawerState extends State<DrawerStudent> {
             ),
             Padding(
               padding: const EdgeInsets.fromLTRB(16.0, 32.0, 0.0, 0.0),
-              child: Text("Alpha 0.0.12", style: TextStyle(color: Color(0xFF6200EE), fontSize: 20),),
+              child: Text("Alpha 0.0.14", style: TextStyle(color: Color(0xFF6200EE), fontSize: 20),),
             ),
             ListTile(
 
