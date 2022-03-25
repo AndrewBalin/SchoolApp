@@ -16,9 +16,6 @@ class _workSavePageState extends State<workSavePage> {
 
   //List classes = ProfileClasses;
 
-
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,6 +23,7 @@ class _workSavePageState extends State<workSavePage> {
         body: ListView(
             physics: const NeverScrollableScrollPhysics(),
             children: <Widget>[
+              Padding(padding: EdgeInsets.all(8.0)),
               TextFormField(validator: (value) {},
                 decoration: InputDecoration(
                     labelText: 'Отправить классам',

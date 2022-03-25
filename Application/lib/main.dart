@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:schoolapp/Wigets/drawer.dart';
 import 'package:schoolapp/Screens/Students/home_screen.dart';
 import 'package:schoolapp/Screens/Students/registration_screen.dart';
+import 'package:schoolapp/Screens/Teachers/onlineLesson.dart';
 
 void main() {
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
@@ -21,7 +22,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: appTitle,
-      home: LogIn(title: ""),
+      home: LogIn(title: "",),
       theme: ThemeData(
         primaryColor: Color(0xFF6200EE),
       ),

@@ -7,6 +7,7 @@ import 'package:schoolapp/Screens/Students/registration_screen.dart';
 import 'package:schoolapp/Screens/Teachers/WorkCreate/workCreator.dart';
 import 'package:schoolapp/Screens/Teachers/lessons.dart';
 import 'package:schoolapp/Screens/Teachers/teacherScreen.dart';
+import 'package:schoolapp/Screens/Teachers/onlineLesson.dart';
 import 'package:schoolapp/data/Profile.dart';
 
 
@@ -155,6 +156,19 @@ class _DrawerState extends State<DrawerTeacher> {
             onTap: () {
               selectDestination(7);
               Navigator.push(context, MaterialPageRoute(builder: (context) => LessonStart(title: "")));
+            },
+          ),
+          Divider(
+            height: 1,
+            thickness: 1,
+          ),
+          ListTile(
+            leading: Icon(Icons.devices),
+            title: Text('Lessons'),
+            selected: _selectedDestination == 7,
+            onTap: () {
+              selectDestination(7);
+              Navigator.push(context, MaterialPageRoute(builder: (context) => OnlineLesson(name: "")));
             },
           ),
           Divider(
